@@ -1,0 +1,49 @@
+class PasswordGenerator {
+  private length: number;
+  private useUppercase: boolean;
+  private useLowercase: boolean;
+  private useNumbers: boolean;
+  private useSymbols: boolean;
+
+  constructor(length: number, useUppercase: boolean, useLowercase: boolean, useNumbers: boolean, useSymbols: boolean) {
+    this.length = length;
+    this.useUppercase = useUppercase;
+    this.useLowercase = useLowercase;
+    this.useNumbers = useNumbers;
+    this.useSymbols = useSymbols;
+  }
+
+  generatePassword(): string {
+    let characters = "";
+    let password = "";
+
+    if (this.useUppercase) {
+      characters += "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    }
+
+    if (this.useLowercase) {
+      characters += "abcdefghijklmnopqrstuvwxyz";
+    }
+
+    if (this.useNumbers) {
+      characters += "0123456789";
+    }
+
+    if (this.useSymbols) {
+      characters += "!@#$%^&*()";
+    }
+
+    for (let i = 0; i < this.length; i++) {
+      const randomIndex = Math.floor(Math.random() * characters.length);
+      password += characters.charAt(randomIndex);
+    }
+
+    return password;
+  }
+}
+
+// Пример использования генератора паролей
+const generator = new PasswordGenerator(12, true, true, true, false);
+const password = generator.generatePassword();
+
+console.log("Сгенерированный пароль:", password);
